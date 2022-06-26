@@ -6,6 +6,7 @@
 # https://gist.github.com/ddgenome/f13f15dd01fb88538dd6fac8c7e73f8c
 #
 # usage: aws-creds MFA_TOKEN [OTHER_AWS_STS_GET-SESSION-TOKEN_OPTIONS...]
+# currently overwrites AWS environment variables. After an hour, exit and restart shell
 function aws-creds () {
     local pkg=aws-creds
     if [[ ! $1 ]]; then
