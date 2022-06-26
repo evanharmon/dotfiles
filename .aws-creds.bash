@@ -13,7 +13,6 @@ function aws-creds () {
         return 99
     fi
 
-    export -n AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
     local iam_user
     if [[ $AWS_IAM_USER ]]; then
         iam_user=$AWS_IAM_USER
@@ -28,7 +27,8 @@ function aws-creds () {
     if [[ $AWS_ACCOUNT_ID ]]; then
         aws_account_id=$AWS_ACCOUNT_ID
     else
-        aws_account_id=REPLACE_WITH_ACCOUNT_IF_YOU_DO_NOT_WANT_TO_SET_AWS_ACCOUNT
+        echo "$pkg: failed to get AWS_ACCOUNT_ID"
+        return 20
     fi
 
     local rv creds_json
@@ -39,6 +39,7 @@ function aws-creds () {
         return "$rv"
     fi
 
+    export -n AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN
     local jq="jq --exit-status --raw-output"
     AWS_ACCESS_KEY_ID=$(echo "$creds_json" | $jq .Credentials.AccessKeyId)
     rv="$?"
