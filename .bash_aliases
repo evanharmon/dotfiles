@@ -58,8 +58,8 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias chrome="/Applications/Google\\ \\Chrome.app/Contents/MacOS/Google\\ \\Chrome"
 alias canary="/Applications/Google\\ Chrome\\ Canary.app/Contents/MacOS/Google\\ Chrome\\ Canary"
 
-alias lol=log --graph --decorate --pretty=oneline --abbrev-commit
-alias lola=log --graph --decorate --pretty=oneline --abbrev-commit --all
+alias lol='log --graph --decorate --pretty=oneline --abbrev-commit'
+alias lola='log --graph --decorate --pretty=oneline --abbrev-commit --all'
 
 alias rg='rg -S'
 
