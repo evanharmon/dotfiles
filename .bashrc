@@ -1,3 +1,4 @@
+# BEGIN: default github codespaces .bashrc
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -135,3 +136,4 @@ __bash_prompt() {
 }
 __bash_prompt
 export PROMPT_DIRTRIM=4
+# END: default github codespaces .bashrc

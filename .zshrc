@@ -1,3 +1,4 @@
+# BEGIN: default github codespaces .zshrc
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -101,3 +102,11 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
+# END: default github codespaces .zshrc
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
