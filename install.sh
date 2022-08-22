@@ -26,9 +26,9 @@ create_symlinks
 # echo "Initializing conda for zsh."
 # conda init zsh
 
-# EH: plan to re-use codespaces theme
-# echo "Setting up the Spaceship theme."
-# sudo apt-get install powerline fonts-powerline -y
-# ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
-# git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-# ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+# RUST
+if ! [ "$(command -v rust)" ]; then
+    echo "Downloading and installing rust"
+    curl https://sh.rustup.rs -sSf | sh
+    echo "ripgrep has to be built from scratch as their is no apple silicon native built target in their CI"
+fi

@@ -137,3 +137,7 @@ __bash_prompt() {
 __bash_prompt
 export PROMPT_DIRTRIM=4
 # END: default github codespaces .bashrc
+
+if [ -f ~/.cargo/env ]; then
+    . "$HOME/.cargo/env"
+fi

@@ -118,6 +118,7 @@ plugins=(
   git
   volta
   zsh-syntax-highlighting
+  zsh-history-substring-search
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -128,3 +129,7 @@ source $ZSH/oh-my-zsh.sh
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
+
+if [ -f ~/.cargo/env ]; then
+  source "$HOME/.cargo/env"
+fi
