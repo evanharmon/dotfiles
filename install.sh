@@ -1,19 +1,22 @@
 #!/bin/bash
 # adapted from https://raw.githubusercontent.com/bstollnitz/dotfiles/main/install.sh
+# use: `./install.sh`
 
 create_symlinks() {
+    # EH: not using it, not sure why it's expected to be in /bin
     # Get the directory in which this script lives.
-    script_dir=$(dirname "$(readlink -f "$0")")
+    # script_dir=$(dirname "$(readlink -f "$0")")
 
     # Get a list of all files in this directory that start with a dot.
-    files=$(find -maxdepth 1 -type f -name ".*")
+    files=$(find $PWD -maxdepth 1 -type f -name ".*")
 
     # Create a symbolic link to each file in the home directory.
     for file in $files; do
-        name=$(basename $file)
+        name="$(basename $file)"
         echo "Creating symlink to $name in home directory."
-        rm -rf ~/$name
-        ln -s $script_dir/$name ~/$name
+        rm -f ~/$name
+        # ln -s $script_dir/$name ~/$name
+        ln -s $PWD/$name ~/$name
     done
 }
 
