@@ -112,7 +112,13 @@ else
   export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
 fi
 
-plugins=(git)
+ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
+
+plugins=(
+  git
+  volta
+  zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
