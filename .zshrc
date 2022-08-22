@@ -3,13 +3,13 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+# export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="codespaces"
+# ZSH_THEME="codespaces"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME="codespaces"
@@ -71,9 +71,9 @@ ZSH_THEME="codespaces"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -103,6 +103,18 @@ source $ZSH/oh-my-zsh.sh
 DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
 # END: default github codespaces .zshrc
+
+ZSH_THEME="codespaces"
+
+if [ -v CODESPACES ]; then
+  export ZSH=$HOME/.oh-my-zsh
+else
+  export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
+fi
+
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
