@@ -115,10 +115,14 @@ fi
 ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
 
 plugins=(
+  aws
   git
+  ripgrep
+  vi-mode
   volta
-  zsh-syntax-highlighting
+  zsh-interactive-cd
   zsh-history-substring-search
+  zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

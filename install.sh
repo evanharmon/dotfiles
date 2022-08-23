@@ -30,5 +30,5 @@ create_symlinks
 if ! [ "$(command -v rust)" ]; then
     echo "Downloading and installing rust"
     curl https://sh.rustup.rs -sSf | sh
-    echo "ripgrep has to be built from scratch as their is no apple silicon native built target in their CI"
+    echo "ripgrep has to be built from source. https://github.com/evanharmon/dotfiles/issues/4"
 fi
