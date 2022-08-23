@@ -104,13 +104,15 @@ DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
 # END: default github codespaces .zshrc
 
+export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
+
 ZSH_THEME="codespaces"
 
-if [ -v CODESPACES ]; then
-  export ZSH=$HOME/.oh-my-zsh
-else
-  export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
-fi
+# if [ -v CODESPACES ]; then
+#   export ZSH=$HOME/.oh-my-zsh
+# else
+#   export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
+# fi
 
 ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
 

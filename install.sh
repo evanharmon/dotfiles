@@ -18,9 +18,6 @@ create_symlinks() {
         # ln -s $script_dir/$name ~/$name
         ln -s $PWD/$name ~/$name
     done
-
-    # non-dotfile symbolic links
-    ln -s $PWD/.oh-my-zsh ~/.oh-my-zsh
 }
 
 create_symlinks
