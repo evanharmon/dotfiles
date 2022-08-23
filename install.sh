@@ -18,6 +18,9 @@ create_symlinks() {
         # ln -s $script_dir/$name ~/$name
         ln -s $PWD/$name ~/$name
     done
+
+    # non-dotfile symbolic links
+    ln -s $PWD/.oh-my-zsh ~/.oh-my-zsh
 }
 
 create_symlinks
@@ -31,4 +34,11 @@ if ! [ "$(command -v rust)" ]; then
     echo "Downloading and installing rust"
     curl https://sh.rustup.rs -sSf | sh
     echo "ripgrep has to be built from source. https://github.com/evanharmon/dotfiles/issues/4"
+fi
+
+# NODE
+if ! [ -s "$NVM_DIR/nvm.sh" ]; then
+    echo "Downloading and installing NVM"
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+    echo "Restart terminal session afterwards for NVM"
 fi
