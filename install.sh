@@ -30,7 +30,7 @@ create_symlinks
 if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
     curl https://sh.rustup.rs -sSf | sh
-    echo "ripgrep has to be built from source. https://github.com/evanharmon/dotfiles/issues/4"
+    echo "\nripgrep has to be built from source. https://github.com/evanharmon/dotfiles/issues/4"
 fi
 
 # NODE
