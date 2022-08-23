@@ -34,7 +34,7 @@ if ! [ "$(command -v rustup)" ]; then
 fi
 
 # NODE
-if ! [ -s "$NVM_DIR/nvm.sh" ]; then
+if ! [ -v CODESPACES ] && ! [ -s "$NVM_DIR/nvm.sh" ]; then
     echo "Downloading and installing NVM"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     echo "Restart terminal session afterwards for NVM"

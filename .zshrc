@@ -104,17 +104,17 @@ DISABLE_AUTO_UPDATE=true
 DISABLE_UPDATE_PROMPT=true
 # END: default github codespaces .zshrc
 
-export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
-
 ZSH_THEME="codespaces"
+ZSH_CUSTOM=''
 
-# if [ -v CODESPACES ]; then
-#   export ZSH=$HOME/.oh-my-zsh
-# else
-#   export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
-# fi
+if [ -v CODESPACES ]; then
+  export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/.oh-my-zsh
+  ZSH_CUSTOM=/workspaces/.codespaces/.persistedshare/dotfiles/custom
+else
+  export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
+  ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
+fi
 
-ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
 
 plugins=(
   aws
