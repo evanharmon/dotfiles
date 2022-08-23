@@ -134,11 +134,3 @@ source $ZSH/oh-my-zsh.sh
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
-
-if [ -f ~/.cargo/env ]; then
-  source "$HOME/.cargo/env"
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

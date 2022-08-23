@@ -25,3 +25,22 @@ fi
 if [ -d "$HOME/.local/bin" ]; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+# RUST
+# CODESPACES places in /usr/local/cargo
+if ! [ -v CODESPACES ]; then
+    PATH=$HOME/.cargo/bin:$PATH
+fi
+
+# EH: this doesn't make sense or seem necessary
+# if ! [ -f ~/.cargo/env ]; then
+#     . "$HOME/.cargo/env"
+# fi
+
+# NODE
+# CODESPACES places in /usr/local/share/nvm/nvm.sh
+if ! [ -v CODESPACES ]; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+fi

@@ -27,7 +27,7 @@ create_symlinks
 # conda init zsh
 
 # RUST
-if ! [ "$(command -v rust)" ]; then
+if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
     curl https://sh.rustup.rs -sSf | sh
     echo "ripgrep has to be built from source. https://github.com/evanharmon/dotfiles/issues/4"
