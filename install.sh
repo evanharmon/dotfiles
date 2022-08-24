@@ -44,6 +44,11 @@ if ! [ "$(command -v rustup)" ]; then
     echo "\nripgrep has to be built from source on apple silicon. https://github.com/evanharmon/dotfiles/issues/4"
 fi
 
+if [ -n "$CODESPACES" ]; then
+    echo "Assuming the codespaces devcontainer.json already has rust"
+    cargo install ripgrep
+fi
+
 # NODE
 if [ -z "$CODESPACES" ]; then
     echo "Downloading and installing / updating NVM"
