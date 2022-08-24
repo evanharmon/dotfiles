@@ -1,6 +1,17 @@
 #!/bin/bash
 # adapted from https://raw.githubusercontent.com/bstollnitz/dotfiles/main/install.sh
+# made more complicated by the necessity to support local M1 Mac alongside Codespaces
+# REQUIRES the dotfiles repo exists at `~/github/evanharmon/dotfiles`
 # use: `./install.sh`
+
+
+
+# BEGIN: handle git submodules in dotfiles repo
+echo "\nUpdating submodules in dotfiles repo\n"
+git -C $PWD submodule update --init --recursive
+# END: handle git submodules in dotfiles repo
+
+# BEGIN: handle .dotfile symlinks
 
 create_symlinks() {
     # EH: not using it, not sure why it's expected to be in /bin
@@ -22,20 +33,27 @@ create_symlinks() {
 
 create_symlinks
 
+
+# END: handle .dotfile symlinks
+
 # EH: not using conda
 # echo "Initializing conda for zsh."
 # conda init zsh
+
+# BEGIN: Support local apple silicon MBP installs without rosetta2 required
 
 # RUST
 if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
     curl https://sh.rustup.rs -sSf | sh
-    echo "\nripgrep has to be built from source. https://github.com/evanharmon/dotfiles/issues/4"
+    echo "\nripgrep has to be built from source on apple silicon. https://github.com/evanharmon/dotfiles/issues/4"
 fi
 
 # NODE
 if [ -z "$CODESPACES" ]; then
-    echo "Downloading and installing NVM"
+    echo "Downloading and installing / updating NVM"
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     echo "Restart terminal session afterwards for NVM"
 fi
+
+# END: Support local apple silicon MBP installs without rosetta2 required
