@@ -5,14 +5,12 @@
 # use: `./install.sh`
 
 
-
-# BEGIN: handle git submodules in dotfiles repo
-echo "\nUpdating submodules in dotfiles repo\n"
+## BEGIN: handle git submodules in dotfiles repo
+echo "Updating submodules in dotfiles repo"
 git -C $PWD submodule update --init --recursive
-# END: handle git submodules in dotfiles repo
+## END: handle git submodules in dotfiles repo
 
-# BEGIN: handle .dotfile symlinks
-
+## BEGIN: handle .dotfile symlinks
 create_symlinks() {
     # EH: not using it, not sure why it's expected to be in /bin
     # Get the directory in which this script lives.
@@ -32,16 +30,13 @@ create_symlinks() {
 }
 
 create_symlinks
-
-
-# END: handle .dotfile symlinks
+## END: handle .dotfile symlinks
 
 # EH: not using conda
 # echo "Initializing conda for zsh."
 # conda init zsh
 
-# BEGIN: Support local apple silicon MBP installs without rosetta2 required
-
+## BEGIN: Support local apple silicon MBP installs without rosetta2 required
 # RUST
 if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
@@ -55,5 +50,4 @@ if [ -z "$CODESPACES" ]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     echo "Restart terminal session afterwards for NVM"
 fi
-
-# END: Support local apple silicon MBP installs without rosetta2 required
+## END: Support local apple silicon MBP installs without rosetta2 required
