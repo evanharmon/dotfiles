@@ -118,8 +118,14 @@ fi
 
 plugins=(
   aws
+  docker
+  docker-compose
   git
+  golang
+  node
+  python
   ripgrep
+  rust
   vi-mode
   zsh-interactive-cd
   zsh-history-substring-search
