@@ -55,4 +55,12 @@ if [ -z "$CODESPACES" ]; then
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
     echo "Restart terminal session afterwards for NVM"
 fi
+
+# PYTHON
+if [ -z "$CODESPACES" ]; then
+    python3 -m pip install --user pipx
+    python3 -m pipx ensurepath
+    pipx install pipenv
+    pipenv install pytest pytest-cov
+fi
 ## END: Support local apple silicon MBP installs without rosetta2 required
