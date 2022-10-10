@@ -60,6 +60,7 @@ fi
 if [ -z "$CODESPACES" ]; then
     python3 -m pip install --user pipx
     python3 -m pipx ensurepath
+    pip3 install pylint
     pipx install pipenv
     pipenv install pytest pytest-cov
 fi
