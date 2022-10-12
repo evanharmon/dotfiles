@@ -122,6 +122,7 @@ plugins=(
   docker-compose
   git
   golang
+  kubectl
   node
   python
   ripgrep
