@@ -51,17 +51,27 @@ fi
 
 # NODE
 if [ -z "$CODESPACES" ]; then
-    echo "Downloading and installing / updating NVM"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-    echo "Restart terminal session afterwards for NVM"
+    # NVM loads as part of .zshrc, check directory instead of command
+    if ! [ -d "$HOME/.nvm" ]; then
+        echo "Downloading and installing / updating NVM"
+        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+        echo "Restart terminal session afterwards for NVM"
+    fi
 fi
 
 # PYTHON
 if [ -z "$CODESPACES" ]; then
-    python3 -m pip install --user pipx
-    python3 -m pipx ensurepath
-    pip3 install pylint
-    pipx install pipenv
-    pipenv install pytest pytest-cov
+    if ! [ "$(command -v pipx)" ]; then
+        python3 -m pip install --user pipx
+        python3 -m pipx ensurepath
+        pipx install pipenv
+    fi
 fi
 ## END: Support local apple silicon MBP installs without rosetta2 required
+
+# Tooling
+if [ -z "$CODESPACES" ]; then
+    if ! [ "$(command -v pulumi)" ]; then
+        curl -fsSL https://get.pulumi.com | sh
+    fi
+fi

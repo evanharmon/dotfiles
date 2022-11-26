@@ -164,3 +164,5 @@ if [ -z "$CODESPACES" ]; then
     PIPX_HOME="$HOME/.local/bin"
     PIPX_BIN_DIR="$HOME/.local/pipx"
 fi
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
