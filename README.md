@@ -13,10 +13,7 @@ configure your github profile to use this repo as the dotfiles for codespaces
 clone this repo to `~/github/evanharmon/dotfiles`
 
 ```console
-cd $HOME
-curl -Lo install.sh https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
 ZSH="$HOME/github/evanharmon/dotfiles/.oh-my-zsh" sh install.sh --unattended --keep-zshrc --skip-chsh
-rm $HOME/install.sh
 ```
 
 run dotfiles install script to symlink necessary files and install plugins
@@ -30,7 +27,7 @@ ripgrep must be build from source as no apple silicon release target is availabl
 
 ```console
 cd ~/github/evanharmon/dotfiles
-source ./install.sh
+./install.sh
 ```
 
 ```console
