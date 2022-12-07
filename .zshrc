@@ -166,3 +166,6 @@ if [ -z "$CODESPACES" ]; then
 fi
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
+
+# extra shell settings that shouldn't be stored in my public dotfiles
+[ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
