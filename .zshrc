@@ -142,11 +142,30 @@ source $ZSH/oh-my-zsh.sh
 
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/bin" ]; then
+    if [[ ":$PATH:" != *":$HOME/bin"* ]]; then
+        export PATH="$HOME/bin:$PATH"
+    fi
+fi
+
+# set PATH so it includes user's .local private bin if it exists
+if [ -d "$HOME/.local/bin" ]; then
+    if [[ ":$PATH:" != *":$HOME/.local/bin"* ]]; then
+      export PATH=$HOME/.local/bin:$PATH
+    fi
+fi
+
+# Set PATH, MANPATH, etc., for Homebrew.'
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # RUST
 # CODESPACES places in /usr/local/cargo
 if [ -z "$CODESPACES" ]; then
-    PATH=$HOME/.cargo/bin:$PATH
-    source "$HOME/.cargo/env"
+  if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+      export PATH=$HOME/.cargo/bin:$PATH
+  fi
+  source "$HOME/.cargo/env"
 fi
 
 # NODE
@@ -160,12 +179,18 @@ fi
 # PYTHON
 # CODESPACES places in /usr/local
 if [ -z "$CODESPACES" ]; then
-    PATH=$(python3 -m site --user-base)/bin:$HOME/.local/bin:$PATH
+    PYTHON_SITE_USER_PATH=$(python3 -m site --user-base)/bin
+    if [[ ":$PATH:" != *":$PYTHON_PATH"* ]]; then
+      PATH=$PYTHON_SITE_USER_PATH/bin:$PATH
+    fi
     PIPX_HOME="$HOME/.local/bin"
     PIPX_BIN_DIR="$HOME/.local/pipx"
 fi
+
 # add Pulumi to the PATH
-export PATH=$PATH:$HOME/.pulumi/bin
+if [[ ":$PATH:" != *":$HOME/.pulumi/bin:"* ]]; then
+  export PATH=$HOME/.pulumi/bin:$PATH
+fi
 
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh

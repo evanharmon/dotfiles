@@ -36,7 +36,34 @@ create_symlinks
 # echo "Initializing conda for zsh."
 # conda init zsh
 
-## BEGIN: Support local apple silicon MBP installs without rosetta2 required
+# Require Xcode / Xcode CLI / rosetta2 on Darwin
+if [[ "$(uname -a)" == Darwin* ]]; then
+    if [[ "$(xcode-select -p)" == /Applications* ]]; then
+        # no easy way to check for xcode cli tools
+        echo "install xcode CLI tools with xcode-select --install if necessary"
+    else
+        echo "install Xcode from the app store, restart, and re-run this install script"
+        exit 0
+    fi
+    if ! [[ "$(pgrep oahd)" ]]; then
+        softwareupdate --install-rosetta
+        echo "Restart machine if necessary and re-run install script"
+        exit 0
+    fi
+fi
+
+# HOMEBREW
+if ! [[ "$(command -v brew)" ]]; then
+    echo "Prepare to enter password for sudo to install homebrew"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Brew Installs
+! [[ "$(command -v gh)" ]] && brew install gh
+! [[ "$(command -v tree)" ]] && brew install tree
+! [[ "$(command -v exercism)" ]] && brew install exercism
+exit 0 # TEMP DEBUGGING
+
 # RUST
 if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
@@ -67,7 +94,6 @@ if [ -z "$CODESPACES" ]; then
         pipx install pipenv
     fi
 fi
-## END: Support local apple silicon MBP installs without rosetta2 required
 
 # Tooling
 if [ -z "$CODESPACES" ]; then
