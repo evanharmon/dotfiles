@@ -62,7 +62,16 @@ fi
 ! [[ "$(command -v gh)" ]] && brew install gh
 ! [[ "$(command -v tree)" ]] && brew install tree
 ! [[ "$(command -v exercism)" ]] && brew install exercism
-exit 0 # TEMP DEBUGGING
+! [[ "$(command -v fzf)" ]] && brew install fzf
+! [[ "$(command -v jq)" ]] && brew install jq
+! [[ "$(command -v cmake)" ]] && brew install cmake
+! [[ "$(command -v rename)" ]] && brew install rename
+! [[ "$(command -v bat)" ]] && brew install bat
+! [[ "$(command -v nmap)" ]] && brew install nmap
+! [[ "$(command -v kubectl)" ]] && brew install kubectl
+! [[ "$(command -v kind)" ]] && brew install kind
+! [[ "$(command -v k9s)" ]] && brew install k9s
+! [[ "$(command -v helm)" ]] && brew install helm
 
 # RUST
 if ! [ "$(command -v rustup)" ]; then
@@ -95,7 +104,7 @@ if [ -z "$CODESPACES" ]; then
     fi
 fi
 
-# Tooling
+# Pulumi
 if [ -z "$CODESPACES" ]; then
     if ! [ "$(command -v pulumi)" ]; then
         curl -fsSL https://get.pulumi.com | sh
