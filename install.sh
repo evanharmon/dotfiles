@@ -78,6 +78,7 @@ fi
 ! [[ "$(command -v direnv)" ]] && brew install direnv
 ! [[ "$(command -v protoc)" ]] && brew install protobuf
 ! [[ "$(command -v pkg-config)" ]] && brew install pkg-config
+! [[ "$(command -v wget)" ]] && brew install wget
 
 # RUST
 if ! [ "$(command -v rustup)" ]; then

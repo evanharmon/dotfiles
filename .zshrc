@@ -198,3 +198,6 @@ if [[ ":$PATH:" != *":$HOME/.local/bin/nvim-macos/bin:"* ]]; then
 fi
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
+
+# Created by `pipx` on 2022-12-16 22:43:25
+export PATH="$PATH:/Users/evanharmon/Library/Python/3.9/bin"
