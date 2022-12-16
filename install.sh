@@ -27,6 +27,8 @@ create_symlinks() {
         # ln -s $script_dir/$name ~/$name
         ln -s $PWD/$name ~/$name
     done
+    # Explicit folders
+    ln -s $PWD/.config/nvim ~/.config/nvim
 }
 
 create_symlinks
