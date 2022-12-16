@@ -192,5 +192,9 @@ if [[ ":$PATH:" != *":$HOME/.pulumi/bin:"* ]]; then
   export PATH=$HOME/.pulumi/bin:$PATH
 fi
 
+# Neovim
+if [[ ":$PATH:" != *":$HOME/.local/bin/nvim-macos/bin:"* ]]; then
+  export PATH=$HOME/.local/bin/nvim-macos/bin:$PATH
+fi
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh

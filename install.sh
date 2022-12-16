@@ -72,6 +72,10 @@ fi
 ! [[ "$(command -v kind)" ]] && brew install kind
 ! [[ "$(command -v k9s)" ]] && brew install k9s
 ! [[ "$(command -v helm)" ]] && brew install helm
+! [[ "$(command -v fd)" ]] && brew install fd
+! [[ "$(command -v direnv)" ]] && brew install direnv
+! [[ "$(command -v protoc)" ]] && brew install protobuf
+! [[ "$(command -v pkg-config)" ]] && brew install pkg-config
 
 # RUST
 if ! [ "$(command -v rustup)" ]; then
