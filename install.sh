@@ -29,6 +29,7 @@ create_symlinks() {
     done
     # Explicit folders
     ln -s $PWD/.config/nvim ~/.config/nvim
+    ln -s $PWD/.config/kitty ~/.config/kitty
 }
 
 create_symlinks
