@@ -1,9 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # adapted from https://raw.githubusercontent.com/bstollnitz/dotfiles/main/install.sh
 # made more complicated by the necessity to support local M1 Mac alongside Codespaces
 # REQUIRES the dotfiles repo exists at `~/github/evanharmon/dotfiles`
 # use: `./install.sh`
 
+set -xe
 
 ## BEGIN: handle git submodules in dotfiles repo
 echo "Updating submodules in dotfiles repo"
@@ -28,11 +29,12 @@ create_symlinks() {
         ln -s $PWD/$name ~/$name
     done
     # Explicit folders
-    ln -s $PWD/.config/nvim ~/.config/nvim
-    ln -s $PWD/.config/kitty ~/.config/kitty
+    ! [ -L ~/.config/nvim ] && ln -s $PWD/.config/nvim ~/.config/nvim
+    ! [ -L ~/.config/kitty ] && ln -s $PWD.config/kitty ~/.config/kitty
 }
 
 create_symlinks
+exit 0
 ## END: handle .dotfile symlinks
 
 # EH: not using conda
@@ -101,6 +103,7 @@ if [ -z "$CODESPACES" ]; then
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
         echo "Restart terminal session afterwards for NVM"
     fi
+    npm install -g neovim
 fi
 
 # PYTHON
@@ -109,6 +112,23 @@ if [ -z "$CODESPACES" ]; then
         python3 -m pip install --user pipx
         python3 -m pipx ensurepath
         pipx install pipenv
+    else 
+        pipx install nvim
+    fi
+fi
+
+# GOLANG
+if [ -z "$CODESPACES" ]; then
+	if ! [ "$(command -v golang)" ]; then
+	    echo "visit https://go.dev/dl/ and download go for this OS"
+	    exit 1
+	fi
+fi
+
+# Ruby
+if [ -z "$CODESPACES" ]; then
+    if [ "$(command -v gem)" ]; then
+        gem install neovim
     fi
 fi
 
