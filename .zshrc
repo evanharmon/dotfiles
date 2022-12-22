@@ -135,13 +135,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-[ -f ~/.bash_aliases ] && source ~/.bash_aliases
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
     if [[ ":$PATH:" != *":$HOME/bin"* ]]; then
@@ -180,11 +173,19 @@ fi
 # CODESPACES places in /usr/local
 if [ -z "$CODESPACES" ]; then
     PYTHON_SITE_USER_PATH=$(python3 -m site --user-base)/bin
-    if [[ ":$PATH:" != *":$PYTHON_PATH"* ]]; then
+    if [[ ":$PATH:" != *":$PYTHON_SITE_USER_PATH"* ]]; then
       PATH=$PYTHON_SITE_USER_PATH/bin:$PATH
     fi
     PIPX_HOME="$HOME/.local/bin"
     PIPX_BIN_DIR="$HOME/.local/pipx"
+fi
+
+# GOLANG
+if [[ ":$PATH:" != *":/usr/local/go:"* ]]; then
+    export PATH=$PATH:/usr/local/go
+fi
+if [[ ":$PATH:" != *":/usr/local/go/bin:"* ]]; then
+    export PATH=$PATH:/usr/local/go/bin
 fi
 
 # add Pulumi to the PATH
@@ -196,8 +197,6 @@ fi
 if [[ ":$PATH:" != *":$HOME/.local/bin/nvim-macos/bin:"* ]]; then
   export PATH=$HOME/.local/bin/nvim-macos/bin:$PATH
 fi
+
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
-
-# Created by `pipx` on 2022-12-16 22:43:25
-export PATH="$PATH:/Users/evanharmon/Library/Python/3.9/bin"
