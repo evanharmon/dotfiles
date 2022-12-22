@@ -4,42 +4,10 @@
 # REQUIRES the dotfiles repo exists at `~/github/evanharmon/dotfiles`
 # use: `./install.sh`
 
-set -xe
-
 ## BEGIN: handle git submodules in dotfiles repo
 echo "Updating submodules in dotfiles repo"
 git -C $PWD submodule update --init --recursive
 ## END: handle git submodules in dotfiles repo
-
-## BEGIN: handle .dotfile symlinks
-create_symlinks() {
-    # EH: not using it, not sure why it's expected to be in /bin
-    # Get the directory in which this script lives.
-    # script_dir=$(dirname "$(readlink -f "$0")")
-
-    # Get a list of all files in this directory that start with a dot.
-    files=$(find $PWD -maxdepth 1 -type f -name ".*")
-
-    # Create a symbolic link to each file in the home directory.
-    for file in $files; do
-        name="$(basename $file)"
-        echo "Creating symlink to $name in home directory."
-        rm -f ~/$name
-        # ln -s $script_dir/$name ~/$name
-        ln -s $PWD/$name ~/$name
-    done
-    # Explicit folders
-    ! [ -L ~/.config/nvim ] && ln -s $PWD/.config/nvim ~/.config/nvim
-    ! [ -L ~/.config/kitty ] && ln -s $PWD.config/kitty ~/.config/kitty
-}
-
-create_symlinks
-exit 0
-## END: handle .dotfile symlinks
-
-# EH: not using conda
-# echo "Initializing conda for zsh."
-# conda init zsh
 
 # Require Xcode / Xcode CLI / rosetta2 on Darwin
 if [[ "$(uname -a)" == Darwin* ]]; then
@@ -104,6 +72,7 @@ if [ -z "$CODESPACES" ]; then
         echo "Restart terminal session afterwards for NVM"
     fi
     npm install -g neovim
+    npm install -g tree-sitter-cli
 fi
 
 # PYTHON
@@ -112,29 +81,9 @@ if [ -z "$CODESPACES" ]; then
         python3 -m pip install --user pipx
         python3 -m pipx ensurepath
         pipx install pipenv
+	echo "close the shell and restart then re-run this script"
+	exit 1
     else 
-        pipx install nvim
-    fi
-fi
-
-# GOLANG
-if [ -z "$CODESPACES" ]; then
-	if ! [ "$(command -v golang)" ]; then
-	    echo "visit https://go.dev/dl/ and download go for this OS"
-	    exit 1
-	fi
-fi
-
-# Ruby
-if [ -z "$CODESPACES" ]; then
-    if [ "$(command -v gem)" ]; then
-        gem install neovim
-    fi
-fi
-
-# Pulumi
-if [ -z "$CODESPACES" ]; then
-    if ! [ "$(command -v pulumi)" ]; then
-        curl -fsSL https://get.pulumi.com | sh
+        pip3 install neovim
     fi
 fi
