@@ -16,12 +16,21 @@ clone this repo to `~/github/evanharmon/dotfiles`
 ZSH="$HOME/github/evanharmon/dotfiles/.oh-my-zsh" sh install.sh --unattended --keep-zshrc --skip-chsh
 ```
 
-run dotfiles install script to symlink necessary files and install plugins
+I manually symlink the repo `.zshrc` file to `$HOME`
+
+```console
+ln -sf ~/github/evanharmon/dotfiles/.zshrc ~/.zshrc
+```
+
+`~/.config/*` files get symlinked as well
+```console
+ln -sf ~/github/evanharmon/dotfiles/.config/nvim ~/.config/nvim
+ln -sf ~/github/evanharmon/dotfiles/.config/kitty ~/.config/kitty
+`
+
+run dotfiles install script to install necessary packages and tooling
 
 ## Apple Silicon Considerations
-
-I am not installing rosetta2 on macs going forward. Largely because my personal
-mac is for music production and I don't want any rosetta2 DAW sessions
 
 ripgrep must be build from source as no apple silicon release target is available
 

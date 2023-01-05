@@ -196,6 +196,8 @@ fi
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
 
+export STARSHIP_CONFIG=~/github/evanharmon/dotfiles/.config/starship.toml
+
 # LAST
 eval "$(direnv hook zsh)"
 eval "$(starship init zsh)"
