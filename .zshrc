@@ -188,11 +188,6 @@ if [[ ":$PATH:" != *":/usr/local/go/bin:"* ]]; then
     export PATH=$PATH:/usr/local/go/bin
 fi
 
-# add Pulumi to the PATH
-if [[ ":$PATH:" != *":$HOME/.pulumi/bin:"* ]]; then
-  export PATH=$HOME/.pulumi/bin:$PATH
-fi
-
 # Neovim
 if [[ ":$PATH:" != *":$HOME/.local/bin/nvim-macos/bin:"* ]]; then
   export PATH=$HOME/.local/bin/nvim-macos/bin:$PATH
