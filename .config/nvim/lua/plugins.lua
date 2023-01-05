@@ -74,7 +74,8 @@ return require('packer').startup(function(use)
   -- Useful completion sources:
   use 'hrsh7th/vim-vsnip' 
   -- Language Specific
-  use 'simrat39/rust-tools.nvim'
+  -- use 'simrat39/rust-tools.nvim'
+  use 'kdarkhan/rust-tools.nvim' -- use until simrat39 merges the inlay fixes
   use {
     'saecki/crates.nvim',
     requires = { 'nvim-lua/plenary.nvim' },

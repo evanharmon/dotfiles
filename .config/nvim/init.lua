@@ -101,11 +101,11 @@ rt.setup({
       -- Code action groups
       vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
     end,
-    settings = {
-      ["rust-analyzer"] = {
-        inlayHints = { locationLinks = false },
-      },
-    }
+    -- settings = {
+    --   ["rust-analyzer"] = {
+    --     inlayHints = { locationLinks = false },
+    --   },
+    -- }
   },
 })
 require('telescope').setup {
