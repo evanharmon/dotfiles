@@ -12,7 +12,7 @@ null_ls.setup({
     sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.diagnostics.eslint,
---          null_ls.builtins.completion.spell,
+        null_ls.builtins.completion.spell,
     },
 })
 require("mason-lspconfig").setup({
@@ -101,11 +101,11 @@ rt.setup({
       -- Code action groups
       vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
     end,
-    -- settings = {
-    --   ["rust-analyzer"] = {
-    --     inlayHints = { locationLinks = false },
-    --   },
-    -- }
+    settings = {
+      ["rust-analyzer"] = {
+        inlayHints = { locationLinks = true },
+      },
+    }
   },
 })
 require('telescope').setup {
@@ -206,6 +206,9 @@ api.nvim_set_option('updatetime', 300)
 -- treesitter Folding - I don't use folding yet
 -- opt.foldmethod = 'expr'
 -- opt.foldexpr = 'nvim_treesitter#foldexpr()'
+
+-- formatting
+cmd([[ autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync() ]])
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
