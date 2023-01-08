@@ -7,8 +7,9 @@
 ## Codespaces
 
 configure your github profile to use this repo as the dotfiles for codespaces
+I don't use codespaces much so these dotfiles may no longer load correctly in GH codespaces
 
-## Mac Install
+## ZSH Install
 
 clone this repo to `~/github/evanharmon/dotfiles`
 
@@ -22,13 +23,25 @@ I manually symlink the repo `.zshrc` file to `$HOME`
 ln -sf ~/github/evanharmon/dotfiles/.zshrc ~/.zshrc
 ```
 
+## Config files
+
 `~/.config/*` files get symlinked as well
 ```console
 ln -sf ~/github/evanharmon/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/github/evanharmon/dotfiles/.config/kitty ~/.config/kitty
-`
+...lots more in the dir
+```
 
-run dotfiles install script to install necessary packages and tooling
+## $HOME files
+
+symlink or copy over the below files to $HOME for tooling / etc
+
+.ignore
+
+## Package / Tooling installs
+
+the dotfiles `install.sh` script is in flux.
+I'm starting to prefer installs or builds in `~/.local` instead of brew
 
 ## Apple Silicon Considerations
 
