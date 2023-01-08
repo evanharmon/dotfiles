@@ -9,13 +9,7 @@
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# ZSH_THEME="codespaces"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME="codespaces"
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+ZSH_THEME="codespaces"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -28,9 +22,6 @@
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
 # zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-# zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -65,15 +56,36 @@
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM=''
+
+if [ -v CODESPACES ]; then
+  export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/.oh-my-zsh
+  ZSH_CUSTOM=/workspaces/.codespaces/.persistedshare/dotfiles/custom
+else
+  export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
+  ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
+fi
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git)
+plugins=(
+  aws
+  docker
+  docker-compose
+  git
+  kubectl
+  ripgrep
+  rust
+  vi-mode
+  zsh-interactive-cd
+  zsh-history-substring-search
+  zsh-syntax-highlighting
+)
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -100,40 +112,8 @@
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-DISABLE_AUTO_UPDATE=true
-DISABLE_UPDATE_PROMPT=true
 # END: default github codespaces .zshrc
 
-ZSH_THEME="codespaces"
-ZSH_CUSTOM=''
-
-if [ -v CODESPACES ]; then
-  export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/.oh-my-zsh
-  ZSH_CUSTOM=/workspaces/.codespaces/.persistedshare/dotfiles/custom
-else
-  export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
-  ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
-fi
-
-
-plugins=(
-  aws
-  docker
-  docker-compose
-  git
-  golang
-  kubectl
-  node
-  python
-  ripgrep
-  rust
-  vi-mode
-  zsh-interactive-cd
-  zsh-history-substring-search
-  zsh-syntax-highlighting
-)
-
-source $ZSH/oh-my-zsh.sh
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
@@ -197,6 +177,7 @@ fi
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
 
 export STARSHIP_CONFIG=~/github/evanharmon/dotfiles/.config/starship.toml
+export RIPGREP_CONFIG_PATH=~/github/evanharmon/dotfiles/.config/.ripgreprc
 
 # LAST
 eval "$(direnv hook zsh)"

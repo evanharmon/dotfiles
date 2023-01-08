@@ -1,0 +1,25 @@
+--max-columns=150
+--max-columns-preview
+
+--hidden
+
+# common repo dirs to ignore
+--glob=!git/*
+--glob=!node_modules/*
+--glob=!build/*
+--glob=!coverage/*
+--glob=!out/*
+
+# $HOME dirs to ignore
+--glob=!Applications/*
+--glob=!Desktop/*
+--glob=!Documents/*
+--glob=!Downloads/*
+--glob=!Library/*
+--glob=!Movies/*
+--glob=!Music/*
+--glob=!Pictures/*
+--glob=!bin/*
+
+--smart-case
+--context=3
