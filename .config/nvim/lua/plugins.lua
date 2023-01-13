@@ -45,7 +45,8 @@ return require('packer').startup(function(use)
       })
     end
   }
-  use { 'mrjones2014/dash.nvim', run = 'make install', }
+  -- not really using dash much
+  -- use { 'mrjones2014/dash.nvim', run = 'make install', }
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
@@ -53,7 +54,11 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.0',
-    requires = { {'nvim-telescope/telescope-fzf-native.nvim'}, {'nvim-lua/plenary.nvim'}, {'mrjones2014/dash.nvim'} }
+    requires = {
+      {'nvim-telescope/telescope-fzf-native.nvim'},
+      {'nvim-lua/plenary.nvim'},
+      {'mrjones2014/dash.nvim'}
+    },
   }
   use {
     'nvim-lualine/lualine.nvim',
@@ -74,8 +79,7 @@ return require('packer').startup(function(use)
   -- Useful completion sources:
   use 'hrsh7th/vim-vsnip' 
   -- Language Specific
-  -- use 'simrat39/rust-tools.nvim'
-  use 'kdarkhan/rust-tools.nvim' -- use until simrat39 merges the inlay fixes
+  use 'simrat39/rust-tools.nvim'
   use {
     'saecki/crates.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
@@ -86,10 +90,34 @@ return require('packer').startup(function(use)
     'windwp/nvim-autopairs',
     config = function() require('nvim-autopairs').setup {} end
   }
+  use {
+    'numToStr/Comment.nvim',
+    config = function() require('Comment').setup() end
+  }
   -- maybe try noice instead?
   use {
     'j-hui/fidget.nvim',
     config = function () require('fidget').setup {} end
+  }
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function() require("trouble").setup { } end
+  }
+  use {
+    "folke/which-key.nvim",
+    config = function() require("which-key").setup {} end
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

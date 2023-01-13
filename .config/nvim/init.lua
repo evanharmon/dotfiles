@@ -8,17 +8,32 @@ g.mapleader=' '
 require('plugins')
 require('mason').setup()
 local null_ls = require("null-ls")
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Formatting-on-save
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
     sources = {
+        null_ls.builtins.formatting.prettierd,
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.diagnostics.eslint,
-        null_ls.builtins.completion.spell,
     },
+    on_attach = function(client, bufnr)
+        if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+                    vim.lsp.buf.format({ bufnr = bufnr })
+                end,
+            })
+        end
+    end,
 })
 require("mason-lspconfig").setup({
   -- asm_lsp currently has a bug with cargo nightly
   -- had to install codelldb manually thru :Mason
-  ensure_installed = { "bashls", "clangd", "cmake", "cssls", "dockerls", "emmet_ls", "gopls", "html", "jedi_language_server", "jsonls", "marksman", "rust_analyzer", "sqlls", "sumneko_lua", "taplo", "tsserver" }
+  ensure_installed = { "bashls", "clangd", "cmake", "cssls", "dockerls", "emmet_ls", "gopls", "html", "jedi_language_server", "jsonls", "rust_analyzer", "sqlls", "sumneko_lua", "taplo", "tsserver" }
 })
 
 -- set termguicolors to enable highlight groups
@@ -94,6 +109,13 @@ cmp.setup({
 })
 local rt = require("rust-tools")
 rt.setup({
+  tools = {
+    runnables = { use_telescope = true },
+    inlayHints = {
+      auto = true,
+      locationLinks = true
+    },
+  },
   server = {
     on_attach = function(_, bufnr)
       -- Hover actions
@@ -103,7 +125,7 @@ rt.setup({
     end,
     settings = {
       ["rust-analyzer"] = {
-        inlayHints = { locationLinks = true },
+        checkOnSave = { command = "clippy", },
       },
     }
   },
@@ -145,12 +167,10 @@ set path+=~/JUCE/modules
 set shell=/bin/zsh
 set tags+=~/JUCE/modules/tags
 set nofoldenable
-set mouse=r
-set nomodeline
-set conceallevel=1
 --]]
 
 cmd([[
+set mouse=r
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/node_modules/*,*/dist/*	" OSX/Linux
 set backspace=indent,eol,start
 set encoding=utf8
@@ -172,43 +192,35 @@ set nobackup nowritebackup noswapfile autoread
 set hlsearch incsearch ignorecase smartcase
 set wildmenu
 set clipboard+=unnamed,unnamedplus
-set showcmd
 set showmatch
-set showmode
-set scrolloff=1
-set sidescrolloff=5
 set colorcolumn=+1
 set linespace=0
 set nojoinspaces
 set display+=lastline
 set timeoutlen=500
-set cmdheight=2
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
 set scrollback=100000
 set shiftround
 
 colorscheme tokyonight-night
 ]])
+-- have a fixed column for the diagnostics to appear in
+-- this removes the jitter when warnings/errors flow in
+vim.wo.signcolumn = "yes"
+-- shortness: avoid showing extra messages when using completion
+opt.shortmess = vim.opt.shortmess + { c = true}
+-- updatetime: set updatetime for CursorHold
+api.nvim_set_option('updatetime', 100)
 
 --Set completeopt to have a better completion experience
 -- :help completeopt
 -- menuone: popup even when there's only one match
 -- noinsert: Do not insert text until a selection is made
 -- noselect: Do not select, force to select one from the menu
--- shortness: avoid showing extra messages when using completion
--- updatetime: set updatetime for CursorHold
 opt.completeopt = {'menuone', 'noselect', 'noinsert'}
-opt.shortmess = vim.opt.shortmess + { c = true}
-api.nvim_set_option('updatetime', 300) 
 
 -- treesitter Folding - I don't use folding yet
 -- opt.foldmethod = 'expr'
 -- opt.foldexpr = 'nvim_treesitter#foldexpr()'
-
--- formatting
-cmd([[ autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync() ]])
 
 -- Fixed column for diagnostics to appear
 -- Show autodiagnostic popup on cursor hover_range
@@ -233,9 +245,6 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 -- imap <down> <nop>
 -- imap <left> <nop>
 -- imap <right> <nop>
--- " if on iterm2, add key pref for CTRL-H in prefs,
--- " action send escape sequence, type in [104;5u
--- nnoremap _ <C-w>_
 -- " Open file under cursor in vertical split
 -- nnoremap gf :vertical wincmd f<CR>
 
