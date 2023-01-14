@@ -93,6 +93,7 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
+export XDG_CONFIG_HOME=$HOME/.config
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -115,6 +116,7 @@ source $ZSH/oh-my-zsh.sh
 # END: default github codespaces .zshrc
 
 
+# CUSTOM BIN PATHS TO APPEND
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ]; then
     if [[ ":$PATH:" != *":$HOME/bin"* ]]; then

@@ -37,6 +37,12 @@ ln -sf ~/github/evanharmon/dotfiles/.config/kitty ~/.config/kitty
 symlink or copy over the below files to $HOME for tooling / etc
 
 .ignore
+.gitignore
+
+## Git Config
+
+example git config located at `.git/config`
+be sure to copy over the `.gitignore` to $HOME
 
 ## Package / Tooling installs
 

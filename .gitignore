@@ -3,3 +3,6 @@
 
 # nvim
 packer_compiled.lua
+
+# python
+.flake8
