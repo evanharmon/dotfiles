@@ -24,10 +24,10 @@ ln -sf ~/github/evanharmon/dotfiles/.zshrc ~/.zshrc
 ```
 
 ## Config files
+Currently not tracking nvim config while I find a setup I like.
 
 `~/.config/*` files get symlinked as well
 ```console
-ln -sf ~/github/evanharmon/dotfiles/.config/nvim ~/.config/nvim
 ln -sf ~/github/evanharmon/dotfiles/.config/kitty ~/.config/kitty
 ...lots more in the dir
 ```

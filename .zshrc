@@ -62,8 +62,8 @@ if [ -v CODESPACES ]; then
   export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/.oh-my-zsh
   ZSH_CUSTOM=/workspaces/.codespaces/.persistedshare/dotfiles/custom
 else
-  export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
-  ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
+  export ZSH=$HOME/projects/github/evanharmon/dotfiles/.oh-my-zsh
+  ZSH_CUSTOM=$HOME/projects/github/evanharmon/dotfiles/custom
 fi
 
 # Which plugins would you like to load?
@@ -178,8 +178,8 @@ fi
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
 
-export STARSHIP_CONFIG=~/github/evanharmon/dotfiles/.config/starship.toml
-export RIPGREP_CONFIG_PATH=~/github/evanharmon/dotfiles/.config/.ripgreprc
+export STARSHIP_CONFIG=~/projects/github/evanharmon/dotfiles/.config/starship.toml
+export RIPGREP_CONFIG_PATH=~/projects/github/evanharmon/dotfiles/.config/.ripgreprc
 
 # LAST
 eval "$(direnv hook zsh)"
