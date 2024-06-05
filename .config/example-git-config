@@ -1,0 +1,21 @@
+[core]
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+  ignorecase = true
+  precomposeunicode = true
+  excludesFile = ~/.gitignore
+  editor = nvim
+  pager = less -F -X
+[submodule]
+  recurse = true
+[push]
+  autoSetupRemote = true
+  recurseSubmodules = check
+[rebase]
+  autostash = true
+[merge]
+  conflictstyle = diff3
+[alias]
+  pushfwl = push --force-with-lease
