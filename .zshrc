@@ -3,7 +3,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/github/evanharmon/dotfiles/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -55,16 +55,7 @@ ZSH_THEME="codespaces"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-ZSH_CUSTOM=''
-
-if [ -v CODESPACES ]; then
-  export ZSH=/workspaces/.codespaces/.persistedshare/dotfiles/.oh-my-zsh
-  ZSH_CUSTOM=/workspaces/.codespaces/.persistedshare/dotfiles/custom
-else
-  export ZSH=$HOME/projects/github/evanharmon/dotfiles/.oh-my-zsh
-  ZSH_CUSTOM=$HOME/projects/github/evanharmon/dotfiles/custom
-fi
+ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -72,13 +63,11 @@ fi
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
-  docker
-  docker-compose
+  # aws
   git
-  kubectl
+  # kubectl # adds too many alias
   ripgrep
-  rust
+  # rust
   vi-mode
   zsh-interactive-cd
   zsh-history-substring-search
@@ -93,7 +82,7 @@ source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
-export XDG_CONFIG_HOME=$HOME/.config
+# export XDG_CONFIG_HOME=$HOME/.config
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -116,71 +105,39 @@ export XDG_CONFIG_HOME=$HOME/.config
 # END: default github codespaces .zshrc
 
 
-# CUSTOM BIN PATHS TO APPEND
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ]; then
-    if [[ ":$PATH:" != *":$HOME/bin"* ]]; then
-        export PATH="$HOME/bin:$PATH"
-    fi
-fi
-
-# set PATH so it includes user's .local private bin if it exists
-if [ -d "$HOME/.local/bin" ]; then
-    if [[ ":$PATH:" != *":$HOME/.local/bin"* ]]; then
-      export PATH=$HOME/.local/bin:$PATH
-    fi
-fi
-
-# Set PATH, MANPATH, etc., for Homebrew.'
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# RUST
-# CODESPACES places in /usr/local/cargo
-if [ -z "$CODESPACES" ]; then
-  if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
-      export PATH=$HOME/.cargo/bin:$PATH
-  fi
-  source "$HOME/.cargo/env"
-fi
-
-# NODE
-# CODESPACES places in /usr/local/share/nvm/nvm.sh
-if [ -z "$CODESPACES" ]; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-fi
+# NOTE: set PATH so it includes user's .local home folder bin if it exists
+# if [ -d "$HOME/.local/bin" ]; then
+#     if [[ ":$PATH:" != *":$HOME/.local/bin"* ]]; then
+#       export PATH=$HOME/.local/bin:$PATH
+#     fi
+# fi
 
 # PYTHON
+# NOTE: not using codespaces for now
 # CODESPACES places in /usr/local
-if [ -z "$CODESPACES" ]; then
-    PYTHON_SITE_USER_PATH=$(python3 -m site --user-base)/bin
-    if [[ ":$PATH:" != *":$PYTHON_SITE_USER_PATH"* ]]; then
-      PATH=$PYTHON_SITE_USER_PATH/bin:$PATH
-    fi
-    PIPX_HOME="$HOME/.local/bin"
-    PIPX_BIN_DIR="$HOME/.local/pipx"
-fi
-
-# GOLANG
-if [[ ":$PATH:" != *":/usr/local/go:"* ]]; then
-    export PATH=$PATH:/usr/local/go
-fi
-if [[ ":$PATH:" != *":/usr/local/go/bin:"* ]]; then
-    export PATH=$PATH:/usr/local/go/bin
-fi
+# if [ -z "$CODESPACES" ]; then
+#     PYTHON_SITE_USER_PATH=$(python3 -m site --user-base)/bin
+#     if [[ ":$PATH:" != *":$PYTHON_SITE_USER_PATH"* ]]; then
+#       PATH=$PYTHON_SITE_USER_PATH/bin:$PATH
+#     fi
+#     PIPX_HOME="$HOME/.local/bin"
+#     PIPX_BIN_DIR="$HOME/.local/pipx"
+# fi
 
 # Neovim
-if [[ ":$PATH:" != *":$HOME/.local/bin/nvim-macos/bin:"* ]]; then
-  export PATH=$HOME/.local/bin/nvim-macos/bin:$PATH
-fi
+# Currently using VSCODE more with AI tools.
+# if [[ ":$PATH:" != *":$HOME/.local/bin/nvim-macos/bin:"* ]]; then
+#   export PATH=$HOME/.local/bin/nvim-macos/bin:$PATH
+# fi
 
 # extra shell settings that shouldn't be stored in my public dotfiles
 [ -f ~/.non-repo.zsh ] && source ~/.non-repo.zsh
 
-export STARSHIP_CONFIG=~/projects/github/evanharmon/dotfiles/.config/starship.toml
-export RIPGREP_CONFIG_PATH=~/projects/github/evanharmon/dotfiles/.config/.ripgreprc
+# Use config files from my dotfiles repo
+export STARSHIP_CONFIG=~/github/evanharmon/dotfiles/.config/starship.toml
+export RIPGREP_CONFIG_PATH=~/github/evanharmon/dotfiles/.config/.ripgreprc
 
 # LAST
-eval "$(direnv hook zsh)"
+# Set PATH, MANPATH, etc., for Homebrew.'
+eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
