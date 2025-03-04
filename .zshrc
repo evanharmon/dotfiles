@@ -63,7 +63,7 @@ ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  # aws
+  aws
   git
   # kubectl # adds too many alias
   ripgrep

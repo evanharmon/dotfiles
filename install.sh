@@ -6,7 +6,7 @@
 
 ## BEGIN: handle git submodules in dotfiles repo
 echo "Updating submodules in dotfiles repo"
-git -C $PWD submodule update --init --recursive
+git -C "$PWD" submodule update --init --recursive
 ## END: handle git submodules in dotfiles repo
 
 # Require Xcode / Xcode CLI / rosetta2 on Darwin
@@ -32,58 +32,50 @@ if ! [[ "$(command -v brew)" ]]; then
 fi
 
 # Brew Installs
-! [[ "$(command -v gh)" ]] && brew install gh
-! [[ "$(command -v tree)" ]] && brew install tree
-! [[ "$(command -v exercism)" ]] && brew install exercism
-! [[ "$(command -v fzf)" ]] && brew install fzf
-! [[ "$(command -v jq)" ]] && brew install jq
-! [[ "$(command -v cmake)" ]] && brew install cmake
-! [[ "$(command -v rename)" ]] && brew install rename
 ! [[ "$(command -v bat)" ]] && brew install bat
-! [[ "$(command -v nmap)" ]] && brew install nmap
-! [[ "$(command -v kubectl)" ]] && brew install kubectl
-! [[ "$(command -v kind)" ]] && brew install kind
-! [[ "$(command -v k9s)" ]] && brew install k9s
-! [[ "$(command -v helm)" ]] && brew install helm
-! [[ "$(command -v fd)" ]] && brew install fd
+! [[ "$(command -v cmake)" ]] && brew install cmake
 ! [[ "$(command -v direnv)" ]] && brew install direnv
-! [[ "$(command -v protoc)" ]] && brew install protobuf
+! [[ "$(command -v exercism)" ]] && brew install exercism
+! [[ "$(command -v fd)" ]] && brew install fd
+! [[ "$(command -v fnm)" ]] && brew install fnm
+! [[ "$(command -v fzf)" ]] && brew install fzf
+! [[ "$(command -v gh)" ]] && brew install gh
+! [[ "$(command -v helm)" ]] && brew install helm
+! [[ "$(command -v hurl)" ]] && brew install hurl
+! [[ "$(command -v jq)" ]] && brew install jq
+! [[ "$(command -v k9s)" ]] && brew install k9s
+! [[ "$(command -v kind)" ]] && brew install kind
+! [[ "$(command -v kubectl)" ]] && brew install kubectl
+! [[ "$(command -v lazygit)" ]] && brew install lazygit
+! [[ "$(command -v nmap)" ]] && brew install nmap
 ! [[ "$(command -v pkg-config)" ]] && brew install pkg-config
+! [[ "$(command -v pyenv)" ]] && brew install pyenv
+! [[ "$(command -v protoc)" ]] && brew install protobuf
+! [[ "$(command -v rename)" ]] && brew install rename
+! [[ "$(command -v stats)" ]] && brew install stats
+! [[ "$(command -v terraform)" ]] && brew install terraform
+! [[ "$(command -v tree)" ]] && brew install tree
 ! [[ "$(command -v wget)" ]] && brew install wget
+! [[ "$(command -v yq)" ]] && brew install yq
 
 # RUST
 if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
     curl https://sh.rustup.rs -sSf | sh
-    echo "\nripgrep has to be built from source on apple silicon. https://github.com/evanharmon/dotfiles/issues/4"
 fi
 
-if [ -n "$CODESPACES" ]; then
-    echo "Assuming the codespaces devcontainer.json already has rust"
-    cargo install ripgrep
-fi
-
-# NODE
-if [ -z "$CODESPACES" ]; then
-    # NVM loads as part of .zshrc, check directory instead of command
-    if ! [ -d "$HOME/.nvm" ]; then
-        echo "Downloading and installing / updating NVM"
-        curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-        echo "Restart terminal session afterwards for NVM"
-    fi
-    npm install -g neovim
-    npm install -g tree-sitter-cli
-fi
+# Cargo installs
+! [[ "$(command -v rg)" ]] && cargo install ripgrep
 
 # PYTHON
-if [ -z "$CODESPACES" ]; then
-    if ! [ "$(command -v pipx)" ]; then
-        python3 -m pip install --user pipx
-        python3 -m pipx ensurepath
-        pipx install pipenv
-	echo "close the shell and restart then re-run this script"
-	exit 1
-    else 
-        pip3 install neovim
-    fi
+if ! [ "$(command -v pipx)" ]; then
+    python3 -m pip install --user pipx
+    python3 -m pipx ensurepath
+    pipx install pipenv
 fi
+
+## Manually installed as of now
+# `ollama`
+# `orbstack`
+# `multipass`
+# `go`
