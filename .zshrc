@@ -63,10 +63,10 @@ ZSH_CUSTOM=$HOME/github/evanharmon/dotfiles/custom
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  aws
+  # aws
   git
   # kubectl # adds too many alias
-  ripgrep
+  # ripgrep
   # rust
   vi-mode
   zsh-interactive-cd
@@ -106,11 +106,12 @@ source $ZSH/oh-my-zsh.sh
 
 
 # NOTE: set PATH so it includes user's .local home folder bin if it exists
-# if [ -d "$HOME/.local/bin" ]; then
-#     if [[ ":$PATH:" != *":$HOME/.local/bin"* ]]; then
-#       export PATH=$HOME/.local/bin:$PATH
-#     fi
-# fi
+# this is a common install location for tooling
+if [ -d "$HOME/.local/bin" ]; then
+    if [[ ":$PATH:" != *":$HOME/.local/bin"* ]]; then
+      export PATH=$HOME/.local/bin:$PATH
+    fi
+fi
 
 # PYTHON
 # NOTE: not using codespaces for now
@@ -141,3 +142,4 @@ export RIPGREP_CONFIG_PATH=~/github/evanharmon/dotfiles/.config/.ripgreprc
 # Set PATH, MANPATH, etc., for Homebrew.'
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
+. "$HOME/.local/bin/env"

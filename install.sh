@@ -58,6 +58,9 @@ fi
 ! [[ "$(command -v wget)" ]] && brew install wget
 ! [[ "$(command -v yq)" ]] && brew install yq
 
+# ADDITIONAL steps required for below - see relevant headspace docs in-mono repo
+# brew install bash && brew install bash-completion
+
 # RUST
 if ! [ "$(command -v rustup)" ]; then
     echo "Downloading and installing rust"
@@ -74,8 +77,23 @@ if ! [ "$(command -v pipx)" ]; then
     pipx install pipenv
 fi
 
-## Manually installed as of now
-# `ollama`
-# `orbstack`
-# `multipass`
-# `go`
+## TODO: add the below - see in-mono headspace docs for install methods
+# uv
+
+## Manually installed as of now with macOS pkgs. See in-mono headspace docs
+# ollama
+# orbstack
+# multipass
+# go
+# awscli
+
+## Manually installing below with github releases or brew
+# eksctl
+# eksdemo
+# aws-iam-authenticator
+# localstack-cli
+# shellcheck
+
+## TODO: bash completions - see headspace docs in-mono repo
+# git completions
+# pulumi completions
