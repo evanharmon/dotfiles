@@ -58,8 +58,8 @@ Symlink or copy over the below files to $HOME for tooling / etc
 
 ## Git config
 
-Example git config located at `.config/example-git-config`.
-Use it as a base to edit the global git config.
+Example git config located at `example-git-config`.
+Use it as a base to edit the global git config on a new machine.
 
 ## Package / tooling installs
 

@@ -1,0 +1,74 @@
+[core]
+  repositoryformatversion = 0
+  filemode = true
+  bare = false
+  logallrefupdates = true
+  ignorecase = true
+  precomposeunicode = true
+  excludesFile = ~/.gitignore
+  editor = nvim
+  pager = less -F -X
+[submodule]
+  recurse = true
+[push]
+  autoSetupRemote = true
+  recurseSubmodules = check
+[rebase]
+  autostash = true
+[merge]
+  conflictstyle = diff3
+[alias]
+  # Basic shortcuts
+  st = status
+  co = checkout
+  ci = commit
+  br = branch
+  df = diff
+  dc = diff --cached
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  
+  # Advanced aliases
+  amend = commit --amend
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  visual = !gitk
+  
+  # Branch management
+  bra = branch -a
+  brr = branch -r
+  
+  # Detailed logs
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  
+  # Show files modified in last commit
+  dl = "!git ll -1"
+  
+  # Find in files
+  grep = grep -Ii
+  
+  # Show aliases
+  alias = !git config --get-regexp '^alias\\.' | sed 's/alias\\.\\([^ ]*\\) \\(.*\\)/\\1\\\t => \\2/' | sort
+  
+  # Stash operations
+  save = stash save
+  pop = stash pop
+  
+  # Show the remote URL
+  url = remote -v
+  
+  # Force push with lease (safer than force push)
+  pushfwl = push --force-with-lease
+  
+  # Pull with rebase by default
+  up = pull --rebase
+  
+  # Clean local references to remote branches
+  prune = fetch --prune
+  
+  # Show verbose output about tags, branches, or remotes
+  tags = tag -l
+  branches = branch -a
+  remotes = remote -v
