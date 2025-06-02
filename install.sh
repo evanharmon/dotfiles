@@ -52,8 +52,10 @@ fi
 ! [[ "$(command -v pyenv)" ]] && brew install pyenv
 ! [[ "$(command -v protoc)" ]] && brew install protobuf
 ! [[ "$(command -v rename)" ]] && brew install rename
+! [[ "$(command -v starship)" ]] && brew install starship
 ! [[ "$(command -v stats)" ]] && brew install stats
 ! [[ "$(command -v terraform)" ]] && brew install terraform
+! [[ "$(command -v terragrunt)" ]] && brew install terragrunt
 ! [[ "$(command -v tree)" ]] && brew install tree
 ! [[ "$(command -v wget)" ]] && brew install wget
 ! [[ "$(command -v yq)" ]] && brew install yq

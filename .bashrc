@@ -8,8 +8,28 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Share bash history between sessions
+export HISTSIZE=10000
+export HISTFILESIZE=20000
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+
+# Function to handle history sharing
+_share_history() {
+    history -a
+    history -c
+    history -r
+}
+
+# Add history sharing to existing PROMPT_COMMAND
+if [[ "$PROMPT_COMMAND" ]]; then
+    export PROMPT_COMMAND="_share_history; $PROMPT_COMMAND"
+else
+    export PROMPT_COMMAND="_share_history"
+fi
+
 # Enable vi mode for command line editing
-set -o vi
+set -o vi 
 
 # Load bash completion if available
 if [ -f /opt/homebrew/etc/profile.d/bash_completion.sh ]; then

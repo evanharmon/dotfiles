@@ -9,6 +9,9 @@ export PATH="$HOME/.local/bin:$PATH"
 export STARSHIP_CONFIG="$HOME/github/evanharmon/dotfiles/.config/starship.toml"
 export RIPGREP_CONFIG_PATH="$HOME/github/evanharmon/dotfiles/.config/.ripgreprc"
 
+# extend PATH depending on installs
+[ -d "$HOME/.krew/bin" ] && export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
 # Initialize Homebrew paths
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
