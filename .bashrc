@@ -47,9 +47,6 @@ eval "$(starship init bash)"
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 
-# Load local env file if exists
-[ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
-
 # Aliases go here
 
 # Functions go here

@@ -26,6 +26,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 [ -f "$HOME/.local/bin/env" ] && . "$HOME/.local/bin/env"
 
-
 # Source .bashrc for login shells to get interactive settings
 [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
